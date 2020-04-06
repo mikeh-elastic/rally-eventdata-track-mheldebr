@@ -17,7 +17,7 @@
       "parallel": {
         "warmup-time-period": 0,
         "time-period": {{ p_query_time_period }},
-        "clients": 4,
+        "clients": 24,
         "tasks": [
           {
             "operation": "relative-kibana-content_issues-dashboard_50%",
