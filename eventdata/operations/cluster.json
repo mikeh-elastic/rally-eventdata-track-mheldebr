@@ -1,0 +1,75 @@
+{
+  "name": "create-ilm-policy",
+  "operation-type": "raw_request",
+  "path": "/_ilm/policy/elasticlogs",
+  "method": "PUT",
+  "body": {
+     "policy": {
+       "phases": {
+         "hot": {
+           "actions": {
+             "rollover": {
+               "max_age": "30d",
+               "max_size": "50gb",
+               "max_docs": 100000000
+             },
+             "set_priority": {
+               "priority": 100
+             }
+           }
+         },
+         "warm": {
+           "actions": {
+             "allocate": {
+               "require": {
+                 "data": "warm"
+               }
+             },
+             "forcemerge": {
+               "max_num_segments": 1
+             },
+             "set_priority": {
+               "priority": 50
+             }
+           }
+         }
+       }
+     }
+   }
+},
+{
+  "name": "create-ilm-cluster-settings",
+  "operation-type": "raw_request",
+  "path": "/_cluster/settings/",
+  "method": "PUT",
+  "body": {
+     "persistent" : {
+        "indices.lifecycle.poll_interval" : "2m",
+        "cluster.routing.allocation.node_concurrent_incoming_recoveries": 8,
+        "indices.recovery.max_bytes_per_sec": "1024mb"
+      }
+   }
+},
+{
+  "name": "create-monitoring-user",
+  "operation-type": "raw_request",
+  "path": "/_security/user/beat",
+  "method": "POST",
+  "body": {
+     "password" : "beatbeatbeat",
+     "roles" : [ "remote_monitoring_collector" ],
+     "full_name" : "beats",
+     "email" : "beats@heldebrant.com"
+   }
+},
+{
+  "name": "enable-monitoring",
+  "operation-type": "raw_request",
+  "path": "/_cluster/settings/",
+  "method": "PUT",
+  "body": {
+     "persistent" : {
+        "xpack.monitoring.collection.enabled": true
+      }
+   }
+}
