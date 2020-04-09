@@ -20,7 +20,7 @@
       {% if (p_max_shards_node != '0') %}
       "index.routing.allocation.total_shards_per_node": {{p_max_shards_node}},
       {% endif %}
-      {% if (p_ilm != 'no' and rollover_enabled != true) %}
+      {% if (p_ilm != 'no' and (rollover_enabled |default(true)) != true) %}
       "index.routing.allocation.require.data": "hot",
       "index.lifecycle.name": "elasticlogs",
       "index.lifecycle.rollover_alias": "elasticlogs_q_write",
