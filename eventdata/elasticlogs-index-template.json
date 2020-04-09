@@ -3,6 +3,7 @@
 {% set p_refresh_interval = refresh_interval | default("5s") %}
 {% set p_codec = codec | default('best_compression') | lower %}
 {% set p_max_shards_node = max_shards_node | default('0') %}
+{% set p_ilm = ilm | default('no') | lower %}
 {
   "index_patterns": ["{{p_index_prefix}}*"],
   "settings": {
@@ -19,11 +20,13 @@
       {% if (p_max_shards_node != '0') %}
       "index.routing.allocation.total_shards_per_node": {{p_max_shards_node}},
       {% endif %}
-      "index.number_of_replicas": {{ number_of_replicas | default(0) }},
-      "index.number_of_shards": {{ number_of_shards | default(2) }},
+      {% if (p_ilm != 'no' and !rollover_enabled) %}
       "index.routing.allocation.require.data": "hot",
       "index.lifecycle.name": "elasticlogs",
-      "index.lifecycle.rollover_alias": "elasticlogs_q_write"
+      "index.lifecycle.rollover_alias": "elasticlogs_q_write",
+      {% endif %}
+      "index.number_of_replicas": {{ number_of_replicas | default(0) }},
+      "index.number_of_shards": {{ number_of_shards | default(2) }}
   },
   "mappings": {
     "date_detection": false,
