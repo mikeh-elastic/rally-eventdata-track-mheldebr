@@ -1,6 +1,6 @@
 {
   "name": "create-ilm-policy",
-  "operation-type": "raw_request",
+  "operation-type": "raw-request",
   "path": "/_ilm/policy/elasticlogs",
   "method": "PUT",
   "body": {
@@ -39,7 +39,7 @@
 },
 {
   "name": "create-ilm-cluster-settings",
-  "operation-type": "raw_request",
+  "operation-type": "raw-request",
   "path": "/_cluster/settings/",
   "method": "PUT",
   "body": {
@@ -52,7 +52,7 @@
 },
 {
   "name": "create-monitoring-user",
-  "operation-type": "raw_request",
+  "operation-type": "raw-request",
   "path": "/_security/user/beat",
   "method": "POST",
   "body": {
@@ -64,7 +64,7 @@
 },
 {
   "name": "enable-monitoring",
-  "operation-type": "raw_request",
+  "operation-type": "raw-request",
   "path": "/_cluster/settings/",
   "method": "PUT",
   "body": {
