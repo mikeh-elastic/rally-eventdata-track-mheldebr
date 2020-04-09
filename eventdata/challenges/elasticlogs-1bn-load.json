@@ -18,6 +18,18 @@
       "operation": "delete-index-template"
     },
     {
+      "operation": "create-ilm-policy"
+    },
+    {
+      "operation": "create-ilm-cluster-settings"
+    },
+    {
+      "operation": "create-monitoring-user"
+    },
+    {
+      "operation": "enable-monitoring"
+    },
+    {
       "operation": "create-index-template"
     },
     {
